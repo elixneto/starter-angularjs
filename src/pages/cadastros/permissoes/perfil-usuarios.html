@@ -1,0 +1,37 @@
+<h3 class="card-title">
+    <i class="material-icons">people</i>
+    Usuários <small class="text-muted"> {{perfil.nome}} ({{perfil.usuarios.length}})</small>
+</h3>
+
+<div class="row">
+    <div class="col-md-5 form-group">
+        <label><i class="material-icons size-18">add</i> Usuário</label>
+        <ui-select ng-model="usuarioCombo.selecionado" ng-change="IncluirUsuario($select.selected)" theme="bootstrap">
+            <ui-select-match>
+                <span><small>{{$select.selected.tituloReduzido}}</small> {{$select.selected.nome}}</span>
+            </ui-select-match>
+            <ui-select-choices repeat="u in usuarioCombo.lista | filter: $select.search">
+                <small ng-bind-html="u.tituloReduzido"></small>
+                <span ng-bind-html="u.nome | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+</div>
+
+<table class="table table-sm">
+    <tbody>
+        <tr ng-if="perfil.usuarios.length == 0">
+            <td colspan="2">
+                <h4 class="text-danger">Não há registros</h4>
+            </td>
+        </tr>
+        <tr ng-repeat="u in perfil.usuarios">
+            <td style="width:10%">
+                <button class="btn btn-sm btn-danger" ng-click="ExcluirUsuario(u.id)">
+                    <i class="size-12 fa fa-trash"></i>
+                </button>
+            </td>
+            <td><small>{{u.tituloReduzido}}</small> {{u.nome}}</td>
+        </tr>
+    </tbody>
+</table>

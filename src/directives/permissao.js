@@ -1,0 +1,39 @@
+angular.module('app')
+    .directive('permissao', ['$http', '$rootScope', function ($http, $rootScope) {
+        return {
+            restrict: 'A',
+            link: function ($scope, elm, attr) {
+                elm.hide();
+
+                var isLoading = function () {
+                    return $http.pendingRequests.length > 0;
+                };
+                var atualizaObjeto = function (v) {
+                    if (!v) {
+                        if ($rootScope.usuarioLogado.isAdmin == 1) {
+                            elm.show()
+                            return;
+                        }
+
+                        p = attr.permissao;
+                        var achou = false;
+                        if ($rootScope.usuarioLogado.permissoes)
+                            $rootScope.usuarioLogado.permissoes.forEach(function (el) {
+                                if (el == p) {
+                                    elm.show();
+                                    achou = true;
+                                    return;
+                                }
+                            });
+
+                        if (!achou)
+                            elm.hide();
+                    }
+                }
+
+                $scope.$watch(isLoading, function (v) {
+                    atualizaObjeto(v);
+                });
+            }
+        }
+    }]);

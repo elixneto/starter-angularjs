@@ -1,0 +1,46 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "descript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Élix Neto",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "3.0.0",
+    "gulp": "4.0.0",
+    "gulp-autoprefixer": "6.0.0",
+    "gulp-inject": "5.0.2",
+    "gulp-minify-css": "1.2.4",
+    "gulp-rename": "1.4.0",
+    "gulp-sass": "4.0.2",
+    "gulp-uglify": "3.0.1",
+    "gulp-util": "3.0.8"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "5.8.0",
+    "angular": "1.5.0",
+    "angular-animate": "1.5.0",
+    "angular-aria": "1.5.0",
+    "angular-chartist.js": "^5.0.0-beta.1",
+    "angular-input-masks": "4.3.0",
+    "angular-ivh-treeview": "1.1.0",
+    "angular-material": "1.1.13",
+    "angular-messages": "1.5.0",
+    "angular-sanitize": "1.5.0",
+    "angular-ui-mask": "1.8.7",
+    "angular-ui-router": "0.2.13",
+    "angularjs-tooltips": "1.0.5",
+    "chartist": "0.11.0",
+    "countup": "1.8.2",
+    "jquery": "2.2.4",
+    "moment": "2.24.0",
+    "ng-file-upload": "12.2.13",
+    "oclazyload": "1.1.0",
+    "swangular": "1.4.3",
+    "ui-bootstrap4": "3.0.6",
+    "ui-select": "0.19.8"
+  }
+}

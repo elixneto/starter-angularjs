@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-stats">
+            <div class="card-header card-header-default card-header-icon">
+                <div class="card-icon card-photo">
+                    <i class="material-icons">lock</i>
+                </div>
+                <h3 class="card-title text-left">
+                    Novo Perfil de Acesso <small class="text-muted">{{novo.nome}}</small>
+                </h3>
+            </div>
+            <div class="card-footer">
+                <a href="#/cadastros/permissoes">
+                    <i class="fa fa-chevron-left"></i>
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" ng-model="novo.nome" />
+                </div>
+                <div class="col-md-8 form-group">
+                    <label>Descrição</label>
+                    <input type="text" class="form-control" ng-model="novo.descricao" />
+                </div>
+            </div>
+
+            <br />
+            <h4>Funcionalidades</h4>
+            <div ivh-treeview="bagFuncionalidades" ivh-treeview-expand-to-depth="0"></div>
+        </div>
+    </div>
+    <button permissao="CADASTRO_PERMISSOES_PERFIS_CRIAR" type="submit" class="btn btn-success" ng-click="Salvar()"><i
+            class="material-icons">check</i>
+        Salvar
+    </button>
+</form>

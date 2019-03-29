@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-wrapper">
+            <a class="navbar-brand">
+                <i class="material-icons size-36 text-danger">help</i> LOGO
+            </a>
+        </div>
+        <button mat-raised-button class="navbar-toggler" type="button" onclick="sidebarToggle()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#/login" ng-click="Logout()">
+                        <img ng-if="usuarioLogado.fotoPerfil != 'null'" src="{{globals.urlImages + usuarioLogado.fotoPerfil}}" class="foto-perfil-sm" />
+                        <!-- <small>{{usuarioLogado.nome}}</small> -->
+                        <i class="text-danger material-icons">exit_to_app</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

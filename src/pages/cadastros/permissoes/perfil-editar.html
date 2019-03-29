@@ -1,0 +1,29 @@
+<h3 class="card-title text-left">
+    Perfil de Acesso <small class="text-muted">{{editar.nome}}</small>
+</h3>
+
+
+<form>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" ng-model="editar.nome" />
+                </div>
+                <div class="col-md-8 form-group">
+                    <label>Descrição</label>
+                    <input type="text" class="form-control" ng-model="editar.descricao" />
+                </div>
+            </div>
+
+            <br />
+            <h4>Funcionalidades</h4>
+            <div ivh-treeview="bagFuncionalidades" ivh-treeview-expand-to-depth="0"></div>
+        </div>
+    </div>
+    <button permissao="CADASTRO_PERMISSOES_PERFIS_EDITAR" type="submit" class="btn btn-success" ng-click="Salvar()"><i
+            class="material-icons">check</i>
+        Salvar
+    </button>
+</form>

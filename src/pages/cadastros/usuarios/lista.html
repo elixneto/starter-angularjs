@@ -1,0 +1,214 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+                <a permissao = "CADASTRO_USUARIOS_CRIAR" class="card-icon" href="#/cadastros/usuarios/criar">
+                    <i class="material-icons">add</i>
+                </a>
+                <h3 class="card-title text-left">
+                    Usuários
+                </h3>
+            </div>
+            <div class="card-footer">
+                <a href="#/cadastros">
+                    <i class="fa fa-chevron-left"></i>
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card card-plain">
+    <div class="card-header card-header-primary pointer" ng-click="flagMostraFiltro = !flagMostraFiltro">
+        <i ng-if="flagMostraFiltro" class="fa fa-chevron-up"></i>
+        <i ng-if="!flagMostraFiltro" class="fa fa-chevron-down"></i>
+        Filtros
+    </div>
+    <div class="card-body text-left" ng-show="flagMostraFiltro">
+        <form>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="number" ng-model="filtro.id" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Login</label>
+                        <input type="text" ng-model="filtro.login" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" ng-model="filtro.nome" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" ng-click="PaginarDados()">
+                    <i class="material-icons">search</i>
+                    Pesquisar
+                </button>
+                <button class="btn btn-default" ng-click="LimparFiltro()">
+                    <i class="material-icons">close</i>
+                    Limpar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover table-sm table-responsive">
+            <thead>
+                <tr>
+                    <th style="width: 17%;"></th>
+                    <th style="width: 3%;"></th>
+                    <th class="text-center">ID</th>
+                    <th>Nome</th>
+                    <th>Login</th>
+                    <th>Perfil de Acesso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="usuarios.length == 0">
+                    <td colspan="6" class="text-center">
+                        <h4 class="text-danger">Não há registros</h4>
+                    </td>
+                </tr>
+                <tr ng-repeat="u in usuarios track by $index"
+                    ng-class="{'table-warning text-warning': u.situacao == 0}">
+                    <td>
+                        <button permissao="CADASTRO_USUARIOS_EDITAR" ng-if="u.id != 1" class="btn btn-sm btn-primary"
+                            ng-click="AbrirModalEditarUsuario(u.id)">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button permissao = "CADASTRO_USUARIOS_BLOQUEAR" ng-if="u.id != 1 && u.situacao == 1" class="btn btn-sm btn-warning"
+                            ng-click="AbrirModalInativarUsuario(u)">
+                            <i class="material-icons">lock</i>
+                        </button>
+                        <button permissao = "CADASTRO_USUARIOS_DESBLOQUEAR" ng-if="u.id != 1 && u.situacao == 0" class="btn btn-sm btn-success"
+                            ng-click="AbrirModalAtivarUsuario(u)">
+                            <i class="material-icons">lock_open</i>
+                        </button>
+                        <button ng-if="u.id != 1" class="btn btn-sm btn-danger" disabled="disabled">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </td>
+                    <td>
+                        <img ng-if="u.fotoPerfil" src="{{globals.urlImages + u.fotoPerfil}}" class="foto-perfil-sm" />
+                    </td>
+                    <td class="text-center">{{u.id}}</td>
+                    <td><small>{{u.tituloReduzido}}</small> {{u.nome}}</td>
+                    <td><span ng-if="u.login!='admin'">{{u.login}}</span></td>
+                    <td class="text-muted">{{u.perfisDeAcesso}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-6">
+                <ul uib-pagination max-size="10" total-items="total" items-per-page="_pag.quantidade"
+                    ng-model="_pag.paginaAtual" ng-change="PaginarDados()" boundary-links="true"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    Mostrando <b>{{usuarios.length}}</b> de <b>{{total}}</b> registro(s)
+                </div>
+            </div>
+            <div class="col-md-3 text-right">
+                <div class="btn-group btn-group-sm">
+                    <label class="btn btn-primary" ng-model="_pag.quantidade" uib-btn-radio="25"
+                        ng-click="PaginarDados()">25</label>
+                    <label class="btn btn-primary" ng-model="_pag.quantidade" uib-btn-radio="50"
+                        ng-click="PaginarDados()">50</label>
+                    <label class="btn btn-primary" ng-model="_pag.quantidade" uib-btn-radio="100"
+                        ng-click="PaginarDados()">100</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- EDITAR USUARIO -->
+<div class="modal fade" id="modalEditarUsuario" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal"
+                    ng-click="flagAbrirModalEditar=false;">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div ng-if="flagAbrirModalEditar">
+                    <div ng-include="'src/pages/cadastros/usuarios/editar.html?nocache=true'"
+                        ng-controller="usuariosEditarCtrl" ng-init="usuarioID = editarUsuarioID;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- INATIVAR USUARIO -->
+<div class="modal fade" id="modalInativarUsuario" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <h3 class="card-title">
+                    <i class="material-icons">lock</i>
+                    Bloquear <small class="text-muted">{{inativarUsuario.login}}</small>
+                </h3>
+                <div class="alert alert-warning">
+                    Tem certeza que deseja bloquear o acesso do usuário <br />
+                    <b class="size-18">{{inativarUsuario.nome}}</b>
+                    ?
+                </div>
+                <button class="btn btn-warning" ng-click="InativarUsuario()">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ATIVAR USUARIO -->
+<div class="modal fade" id="modalAtivarUsuario" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <h3 class="card-title">
+                    <i class="material-icons">lock_open</i>
+                    Desbloquear <small class="text-muted">{{ativarUsuario.login}}</small>
+                </h3>
+                <div class="alert alert-success">
+                    Tem certeza que deseja desbloquear o acesso do usuário <br />
+                    <b class="size-18">{{ativarUsuario.nome}}</b>
+                    ?
+                </div>
+                <button class="btn btn-success" ng-click="AtivarUsuario()">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>

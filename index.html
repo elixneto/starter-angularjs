@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP TITLE</title>
+
+    <link rel='stylesheet' href='assets/vendor/material-icons/material-icons.css' type='text/css'>
+    <!-- Bootstrap 4 + Material Design + DashboardCSS -->
+    <link rel="stylesheet" href="assets/css/material-dashboard.min.css">
+    <!-- <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="node_modules/chartist/dist/chartist.min.css">
+    <link rel="stylesheet" href="node_modules/ui-select/dist/select.min.css">
+    <link rel="stylesheet" href="assets/vendor/datepicker/datepicker.min.css">
+    <link rel="stylesheet" href="node_modules/angular-ivh-treeview/dist/ivh-treeview.min.css">
+    <link rel="stylesheet" href="node_modules/angular-ivh-treeview/dist/ivh-treeview-theme-basic.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="node_modules/angularjs-tooltips/dist/angular-tooltips.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- CONTROLLERS (Lazy Loading) -->
+    <link id="linkControllers" />
+</head>
+
+<body ng-app="app">
+    <loading></loading>
+
+    <div class="wrapper" ng-controller="appCtrl">
+        <!-- SIDEBAR -->
+        <div data-ng-include="'src/_layout/sidebar.html'" ng-hide="globals.hideMenu"></div>
+
+        <div class="main-panel">
+            <!-- NAVBAR -->
+            <div data-ng-include="'src/_layout/navbar.html'" ng-hide="globals.hideMenu"></div>
+
+            <div class="main-content">
+                <div class="container-fluid">
+
+                    <div ui-view></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <!-- COMPONENTS -->
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-aria/angular-aria.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-messages/angular-messages.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-animate/angular-animate.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="node_modules/chartist/dist/chartist.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-chartist.js/dist/angular-chartist.js"></script>
+        <script type="text/javascript" src="node_modules/oclazyload/dist/ocLazyLoad.min.js"></script>
+        <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script type="text/javascript" src="node_modules/swangular/swangular.js"></script>
+        <script type="text/javascript" src="node_modules/ui-bootstrap4/dist/ui-bootstrap.js"></script>
+        <script type="text/javascript" src="node_modules/ui-bootstrap4/dist/ui-bootstrap-tpls.js"></script>
+        <script type="text/javascript" src="node_modules/ui-select/dist/select.min.js"></script>
+        <script type="text/javascript" src="assets/vendor/datepicker/datepicker.min.js"></script>
+        <script type="text/javascript" src="assets/vendor/datepicker/datepicker.pt-BR.js"></script>
+        <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload-all.min.js"></script>
+        <script type="text/javascript" src="assets/vendor/d3/d3.min.js"></script>
+        <script type="text/javascript" src="assets/vendor/jquery-nestable/jquery-nestable.js"></script>
+        <script type="text/javascript" src="assets/vendor/angular-nestable/ng-nestable.js"></script>
+        <script type="text/javascript" src="assets/vendor/bootstrap4-js/bootstrap4.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-ui-mask/dist/mask.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-material/angular-material.min.js"></script>
+        <script type="text/javascript" src="node_modules/moment/moment.js"></script>
+        <script type="text/javascript"
+            src="node_modules/angular-input-masks/releases/angular-input-masks-standalone.min.js"></script>
+        <script type="text/javascript" src="node_modules/countup/countUp.js"></script>
+        <script type="text/javascript" src="assets/vendor/countup/ngcountup.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-ivh-treeview/dist/ivh-treeview.min.js"></script>
+        <script type="text/javascript" src="assets/utils.js"></script>
+        <script type="text/javascript" src="node_modules/angularjs-tooltips/dist/angular-tooltips.min.js"></script>
+        <script type="text/javascript" src="assets/vendor/FileSaver/FilseSaver.min.js"></script>
+        <script type="text/javascript" src="src/_layout/layout.js"></script>
+
+        <!-- APPs -->
+        <script type="text/javascript" src="src/app/app.js"></script>
+        <script type="text/javascript" src="src/app/controller.js"></script>
+        <script type="text/javascript" src="environment/globals.js"></script>
+        <script type="text/javascript" src="src/app/globals.js"></script>
+        <script type="text/javascript" src="src/app/routes.js"></script>
+        <script type="text/javascript" src="src/app/route-change.js"></script>
+        <script type="text/javascript" src="src/factories/mensagemFactory.js"></script>
+        <script type="text/javascript" src="src/factories/userLoginFactory.js"></script>
+        <script type="text/javascript" src="src/factories/httpInterceptorFactory.js"></script>
+        <script type="text/javascript" src="src/app/interceptors.js"></script>
+        <script type="text/javascript" src="src/app/run.js"></script>
+        <script type="text/javascript" src="src/directives/loading.js"></script>
+        <script type="text/javascript" src="src/directives/permissao.js"></script>
+        <script type="text/javascript" src="src/directives/permissao-parcial.js"></script>
+        <script type="text/javascript" src="src/directives/permissao-admin.js"></script>
+        <script type="text/javascript" src="src/directives/exportarExcel.js"></script>
+    </footer>
+</body>
+
+</html>

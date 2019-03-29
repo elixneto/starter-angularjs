@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="offset-md-1 col-md-7">
+        <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon text-center">
+                    <i class="material-icons size-48">help</i>
+                    <h3 class="card-title">
+                        LOGO
+                    </h3>
+                </div>
+                <h3 class="card-title">
+                    Login
+                </h3>
+            </div>
+            <div class="card-body">
+                <form class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control size-24" ng-model="usuario" placeholder="Usuário" autofocus>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="password" class="form-control size-24" ng-model="senha" placeholder="Senha">
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-block btn-danger" ng-click="Entrar();">
+                                Entrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <a href="" ng-click="EsqueciSenha()"> Esqueci a senha </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

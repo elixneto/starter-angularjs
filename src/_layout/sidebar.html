@@ -1,0 +1,38 @@
+<div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+
+    <div class="logo">
+        <a href="https://link.com.br" class="simple-text" target="_blank">
+            <div class="logo-img">
+                <img src="/assets/img/logo.png" />
+            </div>
+            <span class="small">LINK - LOGO</span>
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <div>
+            <ul class="nav navbar-nav nav-mobile-menu">
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="#/login" ng-click="Logout()" onclick="sidebarClose();">
+                        <i class="material-icons">exit_to_app</i>
+                        <p>Sair</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav">
+            <li permissao-parcial="CADASTRO" ng-class="['nav-item', {'active':globals.pathAtual=='cadastros'}]">
+                <a class="nav-link" href="#/cadastros">
+                    <i class="material-icons">note_add</i>
+                    <p>Cadastros</p>
+                </a>
+            </li>
+            <li permissao-admin ng-class="['nav-item', {'active':globals.pathAtual=='sessoes'}]">
+                <a class="nav-link" href="#/sessoes">
+                    <i class="fa fa-key"></i>
+                    <p>Sessões</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-background" style="background-image: url(./assets/img/fundo_sidebar.png)"></div>
+</div>

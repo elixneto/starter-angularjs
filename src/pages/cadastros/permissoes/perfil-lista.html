@@ -1,0 +1,174 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+                <a permissao="CADASTRO_PERMISSOES_PERFIS_CRIAR" class="card-icon" href="#/cadastros/permissoes/criar">
+                    <i class="material-icons">add</i>
+                </a>
+                <h3 class="card-title text-left">
+                    Perfis de Acesso
+                </h3>
+            </div>
+            <div class="card-footer">
+                <a href="#/cadastros">
+                    <i class="fa fa-chevron-left"></i>
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card card-plain">
+    <div class="card-header card-header-primary pointer" ng-click="flagMostraFiltro = !flagMostraFiltro">
+        <i ng-if="flagMostraFiltro" class="fa fa-chevron-up"></i>
+        <i ng-if="!flagMostraFiltro" class="fa fa-chevron-down"></i>
+        Filtros
+    </div>
+    <div class="card-body text-left" ng-show="flagMostraFiltro">
+        <form>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="number" ng-model="filtro.id" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" ng-model="filtro.nome" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Descricao</label>
+                        <input type="text" ng-model="filtro.descricao" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" ng-click="PaginarDados()">
+                    <i class="material-icons">search</i>
+                    Pesquisar
+                </button>
+                <button class="btn btn-default" ng-click="LimparFiltro()">
+                    <i class="material-icons">close</i>
+                    Limpar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover table-sm table-responsive">
+            <thead>
+                <tr>
+                    <th style="width: 15%;"></th>
+                    <th class="text-center">ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Usuários</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="perfis.length == 0">
+                    <td colspan="4" class="text-center">
+                        <h4 class="text-danger">Não há registros</h4>
+                    </td>
+                </tr>
+                <tr ng-repeat="p in perfis track by $index">
+                    <td>
+                        <button permissao="CADASTRO_PERMISSOES_PERFIS_EDITAR" class="btn btn-sm btn-primary"
+                            ng-click="AbrirModalEditarPerfil(p.id)">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button permissao="CADASTRO_PERMISSOES_PERFIS_ALTERAR_USUARIOS" class="btn btn-sm btn-primary"
+                            ng-click="AbrirModalEditarUsuarios(p.id)">
+                            <i class="material-icons">people</i>
+                        </button>
+                    </td>
+                    <td class="text-center">{{p.id}}</td>
+                    <td>{{p.nome}}</td>
+                    <td>{{p.descricao}}</td>
+                    <td class="text-center">{{p.usuarios.length}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-6">
+                <ul uib-pagination max-size="10" total-items="total" items-per-page="_pag.quantidade"
+                    ng-model="_pag.paginaAtual" ng-change="PaginarDados()" boundary-links="true"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    Mostrando <b>{{perfis.length}}</b> de <b>{{total}}</b> registro(s)
+                </div>
+            </div>
+            <div class="col-md-3 text-right">
+                <div class="btn-group btn-group-sm">
+                    <label class="btn btn-primary" ng-model="_pag.quantidade" uib-btn-radio="25"
+                        ng-click="PaginarDados()">25</label>
+                    <label class="btn btn-primary" ng-model="_pag.quantidade" uib-btn-radio="50"
+                        ng-click="PaginarDados()">50</label>
+                    <label class="btn btn-primary" ng-model="_pag.quantidade" uib-btn-radio="100"
+                        ng-click="PaginarDados()">100</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- EDITAR PERFIL -->
+<div class="modal fade" id="modalEditarPerfil" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal"
+                    ng-click="FecharModalEditarPerfil();">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div ng-if="flagAbrirModalEditarPerfil">
+                    <div ng-include="'src/pages/cadastros/permissoes/perfil-editar.html?nocache'"
+                        ng-controller="perfilEditarCtrl"
+                        ng-init="perfilEditarID = editarPerfilID; Init();">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- EDITAR USUARIOS -->
+<div class="modal fade" id="modalEditarUsuarios" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal"
+                    ng-click="FecharModalEditarUsuarios();">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div ng-if="flagAbrirModalEditarUsuarios">
+                    <div ng-include="'src/pages/cadastros/permissoes/perfil-usuarios.html'"
+                        ng-controller="perfilUsuariosCtrl"
+                        ng-init="perfilUsuarioID = editarUsuariosPerfilID; InitPerfil();">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

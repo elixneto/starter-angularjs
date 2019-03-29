@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-stats">
+            <div class="card-header card-header-default card-header-icon">
+                <div class="card-icon card-photo">
+                    <img id="imgProfile" src="{{imgProfile}}" class="pointer" ngf-select="EscolherFotoPerfil($files);"
+                        ngf-accept="'image/*'" />
+                </div>
+                <h3 class="card-title text-left">
+                    Novo Usuário <small class="text-muted">{{novo.login}}</small>
+                </h3>
+            </div>
+            <div class="card-footer">
+                <a href="#/cadastros/usuarios">
+                    <i class="fa fa-chevron-left"></i>
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form>
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" ng-model="novo.nome" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Login</label>
+                    <input type="text" class="form-control" ng-model="novo.login" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" ng-model="novo.email" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>Cidade</label>
+                    <ui-select ng-model="cidadeCombo.selecionado" theme="bootstrap">
+                        <ui-select-match>
+                            {{$select.selected.nome}}
+                            <button class="btn btn-sm clear-select"
+                                ng-click="cidadeCombo.selecionado=null;$event.stopPropagation();$event.preventDefault();">X</button>
+                        </ui-select-match>
+                        <ui-select-choices repeat="cid in cidadeCombo.lista | filter: $select.search">
+                            <div ng-bind-html="cid.nome | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Data Nascimento</label>
+                    <md-datepicker ng-model="novo.dataNascimento"></md-datepicker>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button permissao="CADASTRO_USUARIOS_CRIAR" type="submit" class="btn btn-success" ng-click="Salvar()"><i
+            class="material-icons">check</i>
+        Salvar
+    </button>
+</form>

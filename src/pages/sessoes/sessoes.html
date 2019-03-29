@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+                <a class="card-icon" href="">
+                    <i class="fa fa-key"></i>
+                </a>
+                <h3 class="card-title text-left">
+                    Sessões
+                </h3>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover table-sm table-responsive">
+            <thead>
+                <tr>
+                    <th style="width: 10%;"></th>
+                    <th>Usuário</th>
+                    <th>Login</th>
+                    <th>Token</th>
+                    <th>Último Login</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="sessoes.length == 0">
+                    <td colspan="5" class="text-center">
+                        <h4 class="text-danger">Não há registros</h4>
+                    </td>
+                </tr>
+                <tr ng-repeat="s in sessoes track by $index">
+                    <td>
+                        <button class="btn btn-sm btn-danger" ng-click="EncerrarSessao(s)">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </td>
+                    <td>{{s.nome}}</td>
+                    <td>{{s.login}}</td>
+                    <td>{{s.token}}</td>
+                    <td>{{s.dataUltimoLogin | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<!-- NOVA REUNIAO -->
+<div class="modal fade" id="modalNovaReuniao" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal" ng-click="FecharModalNovaReuniao();">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body" ng-if="flagAbrirModalNovaReuniao">
+                <div ng-include="'src/pages/cadastros/celulas/nova-reuniao.html?nocache'" ng-controller="celulasNovaReuniaoCtrl"
+                    ng-init="celulaID = novaReuniaoCelulaID; Init();">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VISUALIZAR -->
+<div class="modal fade" id="modalVisualizar" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal" ng-click="FecharModalVisualizar();">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body" ng-if="flagAbrirModalVisualizar">
+                <div ng-include="'src/pages/cadastros/celulas/visualizar.html?nocache'" ng-controller="celulasVisualizarCtrl"
+                    ng-init="celulaID = visualizarCelulaID; Init();">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- EDITAR MEMBROS -->
+<div class="modal fade" id="modalEditarMembros" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xlg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal"
+                    ng-click="FecharModalEditarMembros();">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body" ng-if="flagAbrirModalEditarMembros">
+                <div ng-include="'src/pages/cadastros/celulas/editar-membros.html?nocache23'"
+                    ng-controller="celulasEditarMembrosCtrl" ng-init="celulaID = editarMembrosCelulaID; Init();">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- TROCAR LIDER -->
+<div class="modal fade" id="modalTrocarLider" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close btn btn-sm btn-default" data-dismiss="modal">
+                    Fechar
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <h3 class="card-title">
+                    <i class="material-icons">refresh</i>
+                    Trocar Líder <small class="text-muted">Célula #{{trocarLider.celulaNumero}}</small>
+                </h3>
+                <div class="alert alert-warning">
+                    Escolha o novo líder <br />
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8 form-group">
+                            <ui-select ng-model="trocarLider.novoLider" theme="bootstrap">
+                                <ui-select-match>
+                                    <span class="font-white">{{$select.selected.nome}}</span>
+                                </ui-select-match>
+                                <ui-select-choices repeat="l in liderCombo.lista | filter: $select.search">
+                                    <div ng-bind-html="l.nome | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-warning" ng-click="TrocarLider()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
